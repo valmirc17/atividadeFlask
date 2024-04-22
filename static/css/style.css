@@ -1,0 +1,58 @@
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url(/static/imgs/background.jpg);
+    background-size: cover;
+    background-position: center;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.navbar {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand{
+    padding: 0;
+}
+
+.logo{
+    width: 180px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav .btn-login {
+    background-color: #db202c;
+    margin-right: 30px;
+    color: #000000;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.navbar-nav .btn-login:hover {
+    background-color: #a3131e;
+    color: rgb(255, 255, 255);
+}
