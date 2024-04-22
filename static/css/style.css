@@ -115,7 +115,7 @@ summary:hover {
 /* Estilo para os botões dentro do formulário */
 .cad-filme form input[type="submit"],
 .cad-filme form input[type="reset"] {
-    background-color: #28a745; /* Cor de fundo do botão (verde) */
+    background-color: #db202c; /* Cor de fundo do botão (verde) */
     border: none; /* Remover borda */
     color: #fff; /* Cor do texto */
     padding: 10px 20px; /* Espaçamento interno */
@@ -125,7 +125,7 @@ summary:hover {
 
 /* Estilo para os botões de reset */
 .cad-filme form input[type="reset"] {
-    background-color: #dc3545; /* Cor de fundo do botão de reset (vermelho) */
+    background-color: #262626; /* Cor de fundo do botão de reset (vermelho) */
     margin-left: 10px; /* Espaçamento à esquerda */
 }
 
