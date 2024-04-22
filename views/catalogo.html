@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="title">Cadastro de filmes</h2>
+<details>
+    <summary class="title">[ Cadastrar novo filme ]</summary>
+    <container>
+        <div class="row justify-content-center">
+            <div class="col-md-4 cad-filme">
+                <form action="{{url_for('catalogo')}}" method="POST">
+                    <input type="text" name="titulo" placeholder="Título" class="form-control" required>
+                    <input type="number" name="ano" placeholder="Ano" class="form-control" required>
+                    <input type="text" name="categoria" placeholder="Categoria" class="form-control" required>
+                    <input type="submit" value="Cadastrar" class="btn btn-success">
+                    <input type="reset" value="Limpar" class="btn btn-danger">
+                </form>
+            </div>
+        </div>
+    </container>
+</details>
+<hr>
+<h5 class="title">Filmes no catálogo:</h5>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Título:</th>
+                        <th>Ano:</th>
+                        <th>Categoria:</th>
+                        <th style="text-align: center;" colspan="2">Ação:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for f in filmescatalogo.items %}
+                    <tr>
+                        <td>{{f.titulo}}</td>
+                        <td>{{f.ano}}</td>
+                        <td>{{f.categoria}}</td>
+                        <td><a style="text-decoration: none; color: orange;" href="{{url_for('edit', id=f.id)}}">Editar</a></td>
+                        <td><a style="text-decoration: none; color: red;" href="{{url_for('catalogo', id=f.id)}}" onclick="return confirm('Deseja mesmo excluir o jogo?')">Excluir</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<p style="text-align: center;">
+    {% if filmescatalogo.has_prev%}
+    <a href="{{url_for('catalogo', page=filmescatalogo.prev_num)}}"><< Anterior </a>
+    {% endif %}
+    {% if filmescatalogo.has_next %}
+    <a href="{{url_for('catalogo', page=filmescatalogo.next_num)}}">Próximo >></a>
+    {% endif %}
+</p>
+{% endblock content %}
+

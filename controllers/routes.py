@@ -108,73 +108,65 @@ def init_app(app):
     #     else:                       
     #         return render_template('apigames.html', gamesjson=gamesjson)
     
-    # # CRUD - Listagem de dados
-    # @app.route('/estoque', methods=['GET', 'POST'])
-    # @app.route('/estoque/delete/<int:id>')
-    # def estoque(id=None):
-    #     # Excluindo um jogo
-    #     if id:
-    #         game = Game.query.get(id)
-    #         db.session.delete(game)
-    #         db.session.commit()
-    #         return redirect(url_for('estoque'))
-    #     # Cadastrando um novo jogo
-    #     if request.method == 'POST':
-    #         newgame = Game(request.form['titulo'], request.form['ano'], request.form['categoria'], request.form['plataforma'], request.form['preco'], request.form['quantidade'])
-    #         db.session.add(newgame)
-    #         db.session.commit()
-    #         return redirect(url_for('estoque'))
-    #     else:
-    #         # Captura o valor de 'page' que foi passado pelo método GET
-    #         # Define como padrão o valor 1 e o tipo inteiro
-    #         page = request.args.get('page', 1, type=int)
-    #         # Valor padrão de registros por página
-    #         per_page=3
-    #         # Faz um select no banco a partir da página informada (page)
-    #         # Filtra os registros de 3 em 3 (per_page)
-    #         # Armazenando em "gamesestoque" todos os registros da tabela Game.
-    #         games_page = Game.query.paginate(page=page,per_page=per_page)
-    #         return render_template('estoque.html', gamesestoque=games_page)
-    # # CRUD - Edição de dados
-    # @app.route('/edit/<int:id>',methods=['GET','POST'])
-    # def edit(id):
-    #     g = Game.query.get(id)
-    #     # Editando o jogo com as informações do formulário
-    #     if request.method == 'POST':
-    #         g.titulo = request.form['titulo']
-    #         g.ano = request.form['ano']
-    #         g.categoria = request.form['categoria']
-    #         g.plataforma = request.form['plataforma']
-    #         g.preco = request.form['preco']
-    #         g.quantidade = request.form['quantidade']
-    #         db.session.commit()
-    #         return redirect(url_for('estoque'))
-    #     return render_template('editgame.html', g=g)
+    # CRUD - Listagem de dados
+    @app.route('/catalogo', methods=['GET', 'POST'])
+    @app.route('/catalogo/delete/<int:id>')
+    def catalogo(id=None):
+        # Excluindo um filme
+        if id:
+            filme = Filme.query.get(id)
+            db.session.delete(filme)
+            db.session.commit()
+            return redirect(url_for('catalogo'))
+        # Cadastrando um novo filme
+        if request.method == 'POST':
+            newfilme = Filme(request.form['titulo'], request.form['ano'], request.form['categoria'])
+            db.session.add(newfilme)
+            db.session.commit()
+            return redirect(url_for('catalogo'))
+        else:
+            page = request.args.get('page', 1, type=int)
+            per_page=3
+            filmes_page = Filme.query.paginate(page=page,per_page=per_page)
+            return render_template('catalogo.html', filmescatalogo=filmes_page)
+    # CRUD - Edição de dados
+    @app.route('/edit/<int:id>',methods=['GET','POST'])
+    def edit(id):
+        f = Filme.query.get(id)
+        if request.method == 'POST':
+            f.titulo = request.form['titulo']
+            f.ano = request.form['ano']
+            f.categoria = request.form['categoria']
+            db.session.commit()
+            return redirect(url_for('catalogo'))
+        return render_template('editfilme.html', f=f)
+
+
     # # Definindo tipos de arquivos permitidos
-    # FILE_TYPES = set(['png','jpg','jpeg','gif'])
-    # def arquivos_permitidos(filename):
-    #     return '.' in filename and filename.rsplit('.',1)[1].lower() in FILE_TYPES
+    FILE_TYPES = set(['png','jpg','jpeg','gif'])
+    def arquivos_permitidos(filename):
+        return '.' in filename and filename.rsplit('.',1)[1].lower() in FILE_TYPES
         
-    # # Rota para Galeria
-    # @app.route('/galeria', methods=['GET','POST'])
-    # def galeria():
-    #     # Selecionando os nomes dos arquivos de imagem no banco
-    #     imagens = Imagem.query.all()
-    #     if request.method == 'POST':
-    #         # Captura o arquivo vindo do formulário
-    #         file = request.files['file']
-    #         # Verifica se a extensão do arquivo é permitida
-    #         if not arquivos_permitidos(file.filename):
-    #             flash("Arquivo inválido! Utilize os tipos de arquivos referentes a imagem",'danger')
-    #             return redirect(request.url)
-    #         # Define um nome aleatório para o arquivo
-    #         filename = str(uuid.uuid4())
-    #         # Gravando as informações do arquivo no banco
-    #         img = Imagem(filename)
-    #         db.session.add(img)
-    #         db.session.commit()
-    #         # Salva o arquivo na pasta de uploads
-    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-    #         flash("Imagem enviada com sucesso!",'success')
-    #     return render_template('galeria.html', imagens=imagens)
+    # Rota para Galeria
+    @app.route('/galeria', methods=['GET','POST'])
+    def galeria():
+        # Selecionando os nomes dos arquivos de imagem no banco
+        imagens = Imagem.query.all()
+        if request.method == 'POST':
+            # Captura o arquivo vindo do formulário
+            file = request.files['file']
+            # Verifica se a extensão do arquivo é permitida
+            if not arquivos_permitidos(file.filename):
+                flash("Arquivo inválido! Utilize os tipos de arquivos referentes a imagem",'danger')
+                return redirect(request.url)
+            # Define um nome aleatório para o arquivo
+            filename = str(uuid.uuid4())
+            # Gravando as informações do arquivo no banco
+            img = Imagem(filename)
+            db.session.add(img)
+            db.session.commit()
+            # Salva o arquivo na pasta de uploads
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            flash("Imagem enviada com sucesso!",'success')
+        return render_template('galeria.html', imagens=imagens)
     

@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="col-md-6 m-auto">
+    <h3 style="text-align: center;">Editar jogo:</h3>
+    <form action="{{url_for('edit', id=f.id)}}" method="post">
+        <label for="titulo">Título</label>
+        <input type="text" name="titulo" class="form-control" value="{{f.titulo}}" required>
+        <label for="ano">Ano</label>
+        <input type="number" name="ano" class="form-control" value="{{f.ano}}" required>
+        <label for="categoria">Categoria</label>
+        <input type="text" name="categoria" class="form-control" value="{{f.categoria}}" required>
+        <br>
+        <a href="{{url_for('edit', id=f.id)}}" onclick="return confirm('Deseja confirmar as alterações?')"><input type="submit" value="Alterar" class="btn btn-warning"></a>
+        <a href="{{url_for('catalogo')}}"><input type="button" value="Cancelar" class="btn btn-danger"></a>
+    </form>
+</div>
+{%endblock content%}
