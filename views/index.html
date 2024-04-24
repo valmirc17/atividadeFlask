@@ -16,7 +16,7 @@
     </ol>
     <div class="carousel-inner">
       {% for img in imagens %}
-      <div class="carousel-item {% if loop.first %}active{% endif %}">
+      <div style="height: 500px; scale: 70%; align-items: center; justify-content: center;" class="carousel-item {% if loop.first %}active{% endif %}">
         <img class="d-block w-100" src="{{ url_for('static', filename='uploads/' + img) }}" alt="Imagem {{ loop.index }}">
       </div>
       {% endfor %}

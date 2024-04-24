@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(dir, 'models
 app.config['SECRET_KEY'] = 'thefilmessecret'
 
 # Define o tempo de duração da sessão
-app.config['PERMANENT_SESSION_LIFETIME'] = 30
+app.config['PERMANENT_SESSION_LIFETIME'] = 1800
 
 # Define a pasta que receberá arquivos de upload
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
