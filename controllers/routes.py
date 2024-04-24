@@ -8,16 +8,16 @@ import uuid
 import os
 
 def init_app(app):
-    # Função de middleware para verificar a autenticação do usuário
-    # @app.before_request
-    # def check_auth():
-    #     routes = ['login', 'caduser', 'home']
-    #     # Se a rota atual não requer autenticação, permite o acesso
-    #     if request.endpoint in routes or request.path.startswith('/static/'):
-    #         return
-    #     # Se o usuário não estiver autenticado, redireciona para a página de Login
-    #     if 'user_id' not in session:
-    #         return redirect(url_for('login'))
+    #Função de middleware para verificar a autenticação do usuário
+    @app.before_request
+    def check_auth():
+        routes = ['login', 'caduser', 'home']
+        # Se a rota atual não requer autenticação, permite o acesso
+        if request.endpoint in routes or request.path.startswith('/static/'):
+            return
+        # Se o usuário não estiver autenticado, redireciona para a página de Login
+        if 'user_id' not in session:
+            return redirect(url_for('login'))
     
     # Definindo a rota principal
     @app.route('/')
@@ -145,7 +145,7 @@ def init_app(app):
 
 
     # # Definindo tipos de arquivos permitidos
-    FILE_TYPES = set(['png','jpg','jpeg','gif'])
+    FILE_TYPES = set(['png','jpg','jpeg','gif','webp'])
     def arquivos_permitidos(filename):
         return '.' in filename and filename.rsplit('.',1)[1].lower() in FILE_TYPES
         
