@@ -41,6 +41,8 @@ footer {
     color: white;
     padding: 10px 0;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .navbar {
@@ -61,7 +63,7 @@ footer {
 .navbar-nav .btn-login {
     background-color: #db202c;
     margin-right: 30px;
-    color: #000000;
+    color: #fff;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
@@ -69,8 +71,8 @@ footer {
 }
 
 .navbar-nav .btn-login:hover {
-    background-color: #a3131e;
-    color: rgb(255, 255, 255);
+    background-color: #db202c;
+    color: #000
 }
 
 h2.title-galery{
@@ -84,7 +86,7 @@ h2.title-galery{
 }
 
 div.card {
-    background-color: #343434;
+    background-color: #00000043;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -103,38 +105,81 @@ summary:hover {
     background-color: #333;
 }
 
-/* Estilo para os inputs dentro do formulário */
 .cad-filme form input {
-    background-color: rgba(0, 0, 0, 0.1); /* Background transparente com blur */
-    border: 1px solid #333333; /* Contorno cinza claro */
-    color: #fff; /* Texto branco */
-    padding: 10px; /* Espaçamento interno */
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #333333;
+    color: #fff;
     margin: 10px;
 }
 
-/* Estilo para os botões dentro do formulário */
 .cad-filme form input[type="submit"],
 .cad-filme form input[type="reset"] {
-    background-color: #db202c; /* Cor de fundo do botão (verde) */
-    border: none; /* Remover borda */
-    color: #fff; /* Cor do texto */
-    padding: 10px 20px; /* Espaçamento interno */
-    margin-top: 10px; /* Espaçamento superior */
-    cursor: pointer; /* Mostrar cursor ao passar por cima */
+    background-color: #db202c;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
-/* Estilo para os botões de reset */
 .cad-filme form input[type="reset"] {
-    background-color: #262626; /* Cor de fundo do botão de reset (vermelho) */
-    margin-left: 10px; /* Espaçamento à esquerda */
+    background-color: #262626;
+    margin-left: 10px;
 }
 
 .cad-filme form input::placeholder {
-    color: #fff; /* Cor do placeholder */
+    color: #c7c7c7;
 }
 
-/* Estilo para os inputs quando estão focados */
 .cad-filme form input:focus {
     background-color: rgba(0, 0, 0, 0.5);
-    color: #fff; /* Manter o background preto quando focado */
+    color: #fff;
+}
+
+.cad-filme form label{
+    color: white;
+}
+
+.cad-filme table {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #333333;
+    color: #fff;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.cad-filme table thead{
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #333333 !important;
+    color: #fff !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+}
+
+.cad-filme table th {
+    padding: 10px;
+}
+
+.cad-filme table td {
+    padding: 10px;
+}
+
+.cad-filme table tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.cad-filme table tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+thead tr th{
+    text-align: center;
+}
+
+td{
+    text-align: center;
+}
+
+.main-content{
+    margin-bottom: 90px;
 }

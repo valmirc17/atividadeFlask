@@ -23,50 +23,52 @@ def init_app(app):
     @app.route('/')
     # Função que será executada ao acessar a rota
     def home():
-        # Retorno que será exibido na rota
-        return render_template('index.html')
+        # Obtendo a lista de nomes de arquivos na pasta uploads
+        imagens = os.listdir(app.config['UPLOAD_FOLDER'])
+        print(imagens)
+        return render_template('index.html', imagens=imagens)
     
     # # Rota login
-    # @app.route('/login', methods=['GET','POST'])
-    # def login():
-    #     if request.method == 'POST':
-    #         email = request.form['email']
-    #         password = request.form['password']
-    #         user = Usuario.query.filter_by(email=email).first()
-    #         if user and check_password_hash(user.password, password):
-    #             session['user_id'] = user.id
-    #             session['email'] = user.email
-    #             nickname = user.email.split('@')
-    #             flash(f'Login bem sucedido! Bem-vindo {nickname[0]}','success')
-    #             return redirect(url_for('home'))
-    #         else:
-    #             flash('Falha no login, verifique o email/senha e tente novamente','danger')
-    #     return render_template('login.html')
-    # # Rota de Logout
-    # @app.route('/logout',methods=['GET','POST'])
-    # def logout():
-    #     session.clear()
-    #     return redirect(url_for('home'))
-    # # Rota de cadastro de usuários
-    # @app.route('/caduser',methods=['GET','POST'])
-    # def caduser():
-    #     if request.method == 'POST':
-    #         email = request.form['email']
-    #         password = request.form['password']
-    #         user = Usuario.query.filter_by(email=email).first()
-    #         if user:
-    #             msg = Markup("Usuário já existe. Faça<a href='/login'>login</a>")
-    #             flash(msg,'danger')
-    #             return redirect(url_for('caduser'))
-    #         else:
-    #             hashed_password = generate_password_hash(password, method='scrypt')
-    #             new_user = Usuario(email=email, password=hashed_password)
-    #             db.session.add(new_user)
-    #             db.session.commit()
+    @app.route('/login', methods=['GET','POST'])
+    def login():
+         if request.method == 'POST':
+             email = request.form['email']
+             password = request.form['password']
+             user = Usuario.query.filter_by(email=email).first()
+             if user and check_password_hash(user.password, password):
+                 session['user_id'] = user.id
+                 session['email'] = user.email
+                 nickname = user.email.split('@')
+                 flash(f'Login bem sucedido! Bem-vindo {nickname[0]}','success')
+                 return redirect(url_for('home'))
+             else:
+                 flash('Falha no login, verifique o email/senha e tente novamente','danger')
+         return render_template('login.html')
+    # Rota de Logout
+    @app.route('/logout',methods=['GET','POST'])
+    def logout():
+         session.clear()
+         return redirect(url_for('home'))
+    # Rota de cadastro de usuários
+    @app.route('/caduser',methods=['GET','POST'])
+    def caduser():
+        if request.method == 'POST':
+             email = request.form['email']
+             password = request.form['password']
+             user = Usuario.query.filter_by(email=email).first()
+             if user:
+                 msg = Markup("Usuário já existe. Faça<a href='/login'>login</a>")
+                 flash(msg,'danger')
+                 return redirect(url_for('caduser'))
+             else:
+                 hashed_password = generate_password_hash(password, method='scrypt')
+                 new_user = Usuario(email=email, password=hashed_password)
+                 db.session.add(new_user)
+                 db.session.commit()
                 
-    #             flash('Registro realizado com sucesso! Faça o login', 'success')
-    #     return render_template('caduser.html')
-
+                 flash('Registro realizado com sucesso! Faça o login', 'success')
+        return render_template('caduser.html')
+    
     # @app.route('/games', methods=['GET', 'POST'])
     # def games():
     #     game = gamelist[0]
