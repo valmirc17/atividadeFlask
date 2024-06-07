@@ -28,6 +28,13 @@ def init_app(app):
         print(imagens)
         return render_template('index.html', imagens=imagens)
     
+    # Rota API Filmes
+    @app.route('/api_filmes')
+    # Função que será executada ao acessar a rota
+    def api_filmes():
+        # Obtendo a lista de nomes de arquivos na pasta uploads
+        return render_template('api_filmes.html')
+    
     # # Rota login
     @app.route('/login', methods=['GET','POST'])
     def login():
